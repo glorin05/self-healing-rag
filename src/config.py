@@ -8,9 +8,9 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-# ChromaDB settings
-CHROMA_PATH = os.getenv("CHROMA_PATH", "./vectorstore")
-COLLECTION_NAME = os.getenv("COLLECTION_NAME", "rag_store")
+# Vector store settings
+VECTORSTORE_DIR = os.getenv("VECTORSTORE_DIR", "./vectorstore")
+STORE_FILE = os.path.join(VECTORSTORE_DIR, "store.json")
 
 # Similarity settings
 RELEVANCE_THRESHOLD = float(os.getenv("RELEVANCE_THRESHOLD", "0.3"))
