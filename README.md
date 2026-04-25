@@ -6,6 +6,9 @@ A production-ready Retrieval-Augmented Generation system using LangGraph + Groq 
 
 > "RAG systems don't know when they're wrong. The fix is to make the LLM grade itself. After generating an answer, ask: Is this actually supported by the retrieved documents? No → rewrite the question → try again. Still no → honest I don't know."
 
+## Demo
+![Demo](assets/demo.png)
+
 ## Tech Stack
 
 | Component | Technology |
@@ -13,7 +16,7 @@ A production-ready Retrieval-Augmented Generation system using LangGraph + Groq 
 | Language | Python 3.10+ |
 | LLM | Groq (llama-3.1-8b-instant) |
 | Embeddings | sentence-transformers (all-MiniLM-L6-v2) |
-| Vector Store | ChromaDB |
+| Vector Store | JSON Vector Store (Pure Python) |
 | Workflow | LangGraph StateGraph |
 | Document Loaders | langchain-community (PDF + TXT) |
 
@@ -22,7 +25,7 @@ A production-ready Retrieval-Augmented Generation system using LangGraph + Groq 
 ```
 User Query
     ↓
-retrieve (ChromaDB similarity search)
+retrieve (JSON store similarity search)
     ↓
 grade_documents (relevance > 0.3?)
     ↓ YES          ↓ NO
@@ -55,6 +58,19 @@ python src/ingest.py
 python main.py
 ```
 
+## Usage
+
+```bash
+# Interactive mode
+python main.py
+
+# Single question mode  
+python main.py -q "What is RAG?"
+
+# Health check
+python scripts/health_check.py
+```
+
 ## Project Structure
 
 ```
@@ -65,11 +81,14 @@ self-healing-rag/
 ├── src/
 │   ├── state.py           # GraphState TypedDict
 │   ├── utils.py          # Helpers (cosine similarity + logger)
-│   ├── ingest.py        # Document → ChromaDB pipeline
+│   ├── config.py         # Configuration variables
+│   ├── ingest.py        # Document → JSON Store pipeline
 │   ├── nodes.py        # 7 LangGraph nodes
 │   └── graph.py        # StateGraph builder
+├── scripts/
+│   └── health_check.py  # System health check script
 ├── docs/                # Drop PDFs/TXTs here
-└── vectorstore/          # ChromaDB persists here
+└── vectorstore/          # JSON vector store persists here
 ```
 
 ## Features
@@ -89,7 +108,7 @@ self-healing-rag/
 ```
 $ python main.py
 🧬 SELF-HEALING RAG SYSTEM
-LangGraph + Groq + ChromaDB
+LangGraph + Groq + JSON Vector Store
 
 Commands:
   • Type a question
@@ -123,7 +142,7 @@ python main.py
 # Type: "What is RAG?" → Expected: HIGH confidence
 
 # Test out-of-scope
-# Type: "What is the capital of France?" ��� LOW + fallback
+# Type: "What is the capital of France?" → LOW + fallback
 
 # Test healing needed
 # Type: "How does this work?" → MEDIUM + healing
@@ -131,8 +150,12 @@ python main.py
 
 ## Getting Help
 
-- Add issues at: https://github.com/YOUR_USERNAME/self-healing-rag/issues
+- Add issues at: https://github.com/glorin05/self-healing-rag/issues
 - Groq API keys: https://console.groq.com/keys
+
+## Built by
+**Glorin P P** — CS Student, KMEA Engineering College  
+[LinkedIn](https://linkedin.com/in/glorin-pp) | [GitHub](https://github.com/glorin05)
 
 ## License
 
