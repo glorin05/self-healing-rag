@@ -12,7 +12,7 @@ A production-ready Retrieval-Augmented Generation system using LangGraph + Groq 
 > "RAG systems don't know when they're wrong. The fix is to make the LLM grade itself. After generating an answer, ask: Is this actually supported by the retrieved documents? No → rewrite the question → try again. Still no → honest I don't know."
 
 ## Demo
-![Demo](assets/demo.png)
+![Demo](assets/demo.svg)
 
 ## Tech Stack
 
