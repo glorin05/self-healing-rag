@@ -1,6 +1,11 @@
 # Self-Healing RAG System
 
-A production-ready Retrieval-Augmented Generation system using LangGraph + Groq + ChromaDB with self-correction loop. The LLM grades its own answers and autonomously retries when quality thresholds fail.
+![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Groq API](https://img.shields.io/badge/LLM-Groq-f55036.svg)
+![LangGraph](https://img.shields.io/badge/Workflow-LangGraph-000000.svg)
+
+A production-ready Retrieval-Augmented Generation system using LangGraph + Groq + JSON Vector Store with self-correction loop. The LLM grades its own answers and autonomously retries when quality thresholds fail.
 
 ## Core Concept
 
