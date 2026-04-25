@@ -1,6 +1,6 @@
 # Self-Healing RAG System
 
-![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)
+![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Groq API](https://img.shields.io/badge/LLM-Groq-f55036.svg)
 ![LangGraph](https://img.shields.io/badge/Workflow-LangGraph-000000.svg)
@@ -12,7 +12,7 @@ A production-ready Retrieval-Augmented Generation system using LangGraph + Groq 
 > "RAG systems don't know when they're wrong. The fix is to make the LLM grade itself. After generating an answer, ask: Is this actually supported by the retrieved documents? No → rewrite the question → try again. Still no → honest I don't know."
 
 ## Demo
-> **[🖼️ Upload your terminal screenshot to `assets/demo.png` to display it here!]**
+![Demo](assets/demo.png)
 
 ## Tech Stack
 
