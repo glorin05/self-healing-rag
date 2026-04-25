@@ -1,0 +1,42 @@
+This is a sample document for testing the Self-Healing RAG system.
+
+# What is Retrieval-Augmented Generation (RAG)?
+
+Retrieval-Augmented Generation (RAG) is an AI technique that combines information retrieval with text generation. Instead of relying solely on what a language model learned during training, RAG first searches a knowledge base for relevant documents, then uses those documents as context to generate more accurate and grounded answers.
+
+## Why RAG Matters
+
+Traditional LLMs have a knowledge cutoff date and can hallucinate facts. RAG solves both problems by grounding the model's responses in actual documents. This makes RAG ideal for enterprise applications where accuracy is critical.
+
+## How RAG Works
+
+1. **Document Ingestion**: Documents are loaded, split into chunks, and embedded into vector representations using an embedding model.
+2. **Vector Storage**: These embeddings are stored in a vector database like ChromaDB, Pinecone, or Weaviate.
+3. **Query Processing**: When a user asks a question, the question is also embedded into a vector.
+4. **Retrieval**: The system searches the vector database for chunks whose embeddings are most similar to the query embedding.
+5. **Generation**: The retrieved chunks are passed as context to an LLM, which generates an answer grounded in the retrieved information.
+
+## Self-Healing RAG
+
+A Self-Healing RAG system adds quality gates to the basic RAG pipeline. After retrieval, the system checks if the retrieved documents are actually relevant. After generation, it checks if the answer is supported by the context. If either check fails, the system automatically rewrites the query and tries again. This creates a feedback loop that makes the system more robust.
+
+## Components of This System
+
+- **Groq API**: Provides fast inference for the LLaMA 3 model, which handles query rewriting, answer generation, and answer grading.
+- **ChromaDB**: A lightweight, local vector database that stores document embeddings and supports similarity search.
+- **Sentence Transformers**: The all-MiniLM-L6-v2 model creates dense vector embeddings from text, enabling semantic similarity search.
+- **LangGraph**: A framework for building stateful, multi-step AI workflows as directed graphs with conditional edges.
+
+## Key Concepts
+
+### Cosine Similarity
+Cosine similarity measures the angle between two vectors. A score of 1.0 means the vectors point in the same direction (very similar), while 0.0 means they are orthogonal (unrelated). In RAG, we use cosine similarity to rank how relevant a document chunk is to a query.
+
+### Chunking
+Documents are split into smaller pieces (chunks) because embedding models work best with short text. Overlapping chunks ensure that important context spanning chunk boundaries is not lost.
+
+### Embeddings
+Embeddings are numerical representations of text in a high-dimensional vector space. Semantically similar texts have embeddings that are close together in this space, enabling similarity search.
+
+### Quality Gates
+Quality gates are checkpoints in the pipeline that verify the output meets a minimum quality threshold before proceeding. In self-healing RAG, there are two gates: document relevance grading and answer grading.
